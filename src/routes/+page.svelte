@@ -1,2 +1,25 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import j$ from 'jquery';
+	import { goto } from '$app/navigation';
+	import url from '$lib/modules/url';
+	import { onAuthStateChanged } from 'firebase/auth';
+	import { auth } from '$lib/modules/firebase';
+
+	let forwardButtonText = 'Sign Up';
+
+	onMount(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				forwardButtonText = 'Continue to App';
+			} else {
+				forwardButtonText = 'Sign Up';
+			}
+		});
+		j$('#forward-button').on('click', () => {
+			goto(url.login);
+		});
+	});
+</script>
+
+<button type="button" class="btn btn-light" id="forward-button">{forwardButtonText}</button>

@@ -1,0 +1,24 @@
+@mixin display($property: block) {
+	display: $property;
+}
+
+@mixin flex-direction($direction: column) {
+	flex-direction: $direction;
+}
+
+@mixin flex-justify-align($content: center, $items: center) {
+	justify-content: $content;
+	align-items: $items;
+}
+
+@mixin flex-gap($row-gap: 0, $column-gap: 0) {
+	row-gap: $row-gap;
+	column-gap: $column-gap;
+}
+
+@mixin flex($direction: row, $content: center, $items: center, $row-gap: 0, $column-gap: 0) {
+	@include display(flex);
+	@include flex-direction($direction);
+	@include flex-justify-align($content, $items);
+	@include flex-gap($row-gap, $column-gap);
+}
