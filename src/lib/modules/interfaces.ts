@@ -1,7 +1,6 @@
 export interface UserInterface {
 	name: string;
 	email: string;
-	age: number;
 	address?: string;
 	cart: string[];
 	wishlist?: string[];
@@ -13,6 +12,5 @@ export interface RegisterInterface {
 	password: string;
 	fName: string;
 	lName: string;
-	age: number;
 	address?: string;
 }

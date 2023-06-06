@@ -14,8 +14,8 @@ import type { RegisterInterface } from '$lib/modules/interfaces';
 
 const UserDB = collection(db, 'users');
 
-export const createUserAndStoreData = async (registerData: RegisterInterface) => {
-	const { fName, lName, email, password, age, address } = registerData;
+export async function createUser(registerData: RegisterInterface) {
+	const { fName, lName, email, password, address } = registerData;
 	try {
 		// Create the user in Firebase Authentication
 		const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -31,7 +31,6 @@ export const createUserAndStoreData = async (registerData: RegisterInterface) =>
 			fName: fName,
 			lName: lName,
 			email: user.email,
-			age: age,
 			address: address
 		});
 
@@ -41,7 +40,7 @@ export const createUserAndStoreData = async (registerData: RegisterInterface) =>
 		console.error('Error creating user and storing data:', error);
 		return null;
 	}
-};
+}
 
 export async function findUser(field: string, relation: WhereFilterOp, value: string) {
 	const q = query(UserDB, where(field, relation, value));

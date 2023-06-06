@@ -34,7 +34,7 @@
 		modalTitle = 'Loading...';
 		modalBody = LoadingScreen;
 		data = {};
-		proceedDisabled = false;
+		proceedDisabled = true;
 	}
 
 	function proceedToRegister() {
@@ -72,6 +72,7 @@
 
 			const email = String(j$('#Auth-Email-Input').val());
 			const users = await findUser('email', '==', email);
+			proceedDisabled = false;
 			console.log(users);
 
 			if (users.length == 0) {
@@ -100,7 +101,12 @@
 	{dismissOnProceed}
 	{proceedDisabled}
 />
-<form id="Auth-Form">
+<form
+	id="Auth-Form"
+	on:submit={(e) => {
+		e.preventDefault();
+	}}
+>
 	<h1>Sign Up</h1>
 	<div class="inputs">
 		<InputGroup
