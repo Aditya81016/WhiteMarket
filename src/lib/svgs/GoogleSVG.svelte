@@ -26,17 +26,14 @@
 				height="400"
 			/>
 		</g>
-		<g
-			transform="matrix(Infinity NaN NaN Infinity 0 0)"
-			id="1635ac2b-b47d-4c40-b5a1-50301d5b04fe"
-		/>
-		<g transform="matrix(NaN NaN NaN NaN 0 0)">
+		<g transform="matrix(0 0 0 0 0 0)" id="1635ac2b-b47d-4c40-b5a1-50301d5b04fe" />
+		<g transform="matrix(0 0 0 0 0 0)">
 			<g style="" />
 		</g>
-		<g transform="matrix(NaN NaN NaN NaN 0 0)">
+		<g transform="matrix(0 0 0 0 0 0)">
 			<g style="" />
 		</g>
-		<g transform="matrix(NaN NaN NaN NaN 0 0)">
+		<g transform="matrix(0 0 0 0 0 0)">
 			<g style="" />
 		</g>
 		<g transform="matrix(1.22 0 0 1.22 600 200)">

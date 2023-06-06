@@ -1,11 +1,16 @@
 <script lang="ts">
+	import LoadingScreen from './LoadingScreen.svelte';
+
 	export let id: string,
 		backdrop: string = 'static',
-		title: string,
-		body: any,
+		title: string = 'Loading...',
+		body: any = LoadingScreen,
 		closeText = 'Close',
 		submitText = 'Proceed',
-		data: any;
+		data: any,
+		proceedFunction: () => void,
+		dismissOnProceed: boolean = false,
+		proceedDisabled: boolean = false;
 </script>
 
 <div
@@ -28,7 +33,14 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{closeText}</button>
-				<button type="button" class="btn btn-primary">{submitText}</button>
+				<button
+					type="button"
+					class="btn btn-primary"
+					data-bs-dismiss={dismissOnProceed ? 'modal' : null}
+					id="{id}-Proceed"
+					disabled={proceedDisabled}
+					on:click={proceedFunction}>{submitText}</button
+				>
 			</div>
 		</div>
 	</div>

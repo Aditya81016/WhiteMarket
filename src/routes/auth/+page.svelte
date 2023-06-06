@@ -12,6 +12,7 @@
 	import NoUserFoundModal from './NoUserFoundModal.svelte';
 	import UserFoundModal from './UserFoundModal.svelte';
 	import { findUser } from '$lib/backend/users';
+	import LoginModal from './LoginModal.svelte';
 
 	let emailFeedback = '',
 		emailFeedbackColor = '#FF0000',
@@ -19,9 +20,41 @@
 
 	let modalTitle = 'Loading...',
 		modalBody: typeof LoadingScreen | typeof UserFoundModal = LoadingScreen,
-		username = '';
+		data: any = {},
+		dismissOnProceed = false,
+		proceedDisabled = true;
+
+	function setProceedDisabled(value: boolean) {
+		proceedDisabled = value;
+	}
 
 	$: isSubmitDisabled = !emailIsValid;
+
+	function resetModal() {
+		modalTitle = 'Loading...';
+		modalBody = LoadingScreen;
+		data = {};
+		proceedDisabled = false;
+	}
+
+	function proceedToRegister() {
+		goto(url.register);
+	}
+
+	function proceedToLogin() {
+		resetModal();
+		modalTitle = 'Login';
+		modalBody = LoginModal;
+		proceedDisabled = true;
+		data.setProceedDisabled = setProceedDisabled;
+
+		proceedFunction = () => {
+			resetModal();
+			modalTitle = 'Authenticating...';
+		};
+	}
+
+	let proceedFunction = () => {};
 
 	onMount(() => {
 		j$('#Auth-Email-Input').on('input', () => {
@@ -35,25 +68,38 @@
 		});
 
 		j$('#Auth-Submit-Button').on('click', async () => {
+			resetModal();
+
 			const email = String(j$('#Auth-Email-Input').val());
 			const users = await findUser('email', '==', email);
 			console.log(users);
 
 			if (users.length == 0) {
+				data.email = email;
 				modalTitle = 'No user found with that email';
 				modalBody = NoUserFoundModal;
+				proceedFunction = proceedToRegister;
+				dismissOnProceed = true;
 			} else {
 				const userData = users[0].data();
-				modalTitle = 'User with that email';
+				modalTitle = 'Found user with that email';
 				modalBody = UserFoundModal;
-				username = userData.fName + ' ' + userData.lName;
-				console.log(userData);
+				data.name = userData.fName + ' ' + userData.lName;
+				proceedFunction = proceedToLogin;
 			}
 		});
 	});
 </script>
 
-<Modal id="Auth-Modal" title={modalTitle} body={modalBody} data={{ name: username }} />
+<Modal
+	id="Auth-Modal"
+	title={modalTitle}
+	body={modalBody}
+	{data}
+	{proceedFunction}
+	{dismissOnProceed}
+	{proceedDisabled}
+/>
 <form id="Auth-Form">
 	<h1>Sign Up</h1>
 	<div class="inputs">

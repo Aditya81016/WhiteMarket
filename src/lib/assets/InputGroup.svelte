@@ -23,7 +23,7 @@
 		text-align: left;
 
 		.feedback {
-			position: fixed;
+			position: absolute;
 			font-size: 0.8rem;
 			font-weight: bolder;
 		}
