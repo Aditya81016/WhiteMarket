@@ -83,10 +83,6 @@ export function validateInput(value: string, type: string) {
 			break;
 	}
 
-	if (isValid) {
-		feedback = 'is valid.';
-	}
-
 	return {
 		feedback,
 		feedbackColor,
