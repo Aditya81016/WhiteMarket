@@ -14,7 +14,6 @@
 
 	.divider {
 		@include flex($column-gap: 1rem);
-		color: white;
 
 		hr {
 			// outline: 2px solid white;
