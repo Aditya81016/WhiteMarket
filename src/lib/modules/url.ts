@@ -1,7 +1,7 @@
 export default {
 	root: '/',
-	auth: '/auth',
-	register: '/auth/register',
+	login: '/login',
+	register: '/register',
 	home: '/home',
 	explore: '/explore',
 	about: '/about',

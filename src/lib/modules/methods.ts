@@ -76,7 +76,7 @@ export function validateInput(value: string, type: string) {
 			} else if (/\d/.test(value) && type !== 'confirm' && type !== 'address') {
 				feedback = `Your ${name} should not contain any digits.`;
 			} else if (type !== 'confirm') {
-				feedback = `Great! your ${name} is valid`;
+				feedback = `Looks good! Your ${name} is valid`;
 				feedbackColor = '#00DD00';
 				isValid = true;
 			}

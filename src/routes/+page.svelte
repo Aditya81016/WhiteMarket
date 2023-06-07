@@ -17,7 +17,7 @@
 			}
 		});
 		j$('#forward-button').on('click', () => {
-			goto(url.auth);
+			goto(url.login);
 		});
 	});
 </script>

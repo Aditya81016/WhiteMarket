@@ -8,3 +8,12 @@
 	background-color: #171a1d;
 	color: var(--bs-light);
 }
+
+.hidden {
+	display: none;
+}
+
+.link {
+	text-decoration: underline;
+	color: var(--bs-primary);
+}

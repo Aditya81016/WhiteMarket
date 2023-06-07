@@ -1,3 +1,24 @@
-<div class="spinner-border text-primary" role="status">
-	<span class="visually-hidden">Loading...</span>
+<script lang="ts">
+	export let block = false,
+		color = 'primary';
+</script>
+
+<div class={block ? 'block' : ''}>
+	<div class="spinner-border text-{color}" role="status">
+		<span class="visually-hidden">Loading...</span>
+	</div>
 </div>
+
+<style lang="scss">
+	@import '$lib/scss/mixins.scss';
+	.block {
+		@include flex;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: 10;
+		background-color: rgba($color: #000000, $alpha: 0.5);
+	}
+</style>
