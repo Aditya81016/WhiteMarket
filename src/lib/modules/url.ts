@@ -3,9 +3,10 @@ export default {
 	login: '/login',
 	register: '/register',
 	home: '/home',
+	cart: '/cart',
+	sell: 'sell',
 	explore: '/explore',
-	about: '/about',
-	seller: 'items/add',
+	settings: '/settings',
 
 	exploreQuery: function (search: string, filter: object) {
 		return this.explore + `?search=${search}&filter=${filter}`;

@@ -17,43 +17,18 @@
 			<span class="navbar-toggler-icon" />
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0 gap-2">
 				<li class="nav-item">
 					<a class="nav-link active" aria-current="page" href={url.home}>Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href={url.about}>About</a>
-				</li>
-				<li class="nav-item dropdown">
-					<a
-						class="nav-link dropdown-toggle"
-						href={url.explore}
-						role="button"
-						data-bs-toggle="dropdown"
-						aria-expanded="false"
-					>
-						Explore
-					</a>
-					<ul class="dropdown-menu">
-						<li>
-							<a class="dropdown-item" href={url.exploreQuery('stationeries', {})}>Stationeries</a>
-						</li>
-						<li><a class="dropdown-item" href={url.exploreQuery('groceries', {})}>Groceries</a></li>
-						<li><hr class="dropdown-divider" /></li>
-						<li>
-							<a class="dropdown-item" href={url.exploreQuery('', { userUploadedItems: true })}
-								>User Uploaded Items</a
-							>
-						</li>
-						<li>
-							<a class="dropdown-item" href={url.exploreQuery('', { nestedItems: true })}
-								>Nested Items</a
-							>
-						</li>
-					</ul>
+					<a class="nav-link" href={url.settings}>Settings</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link disabled" href={url.seller}>Upload Items</a>
+					<a class="nav-link" href={url.cart}>Cart</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href={url.sell}>Sell</a>
 				</li>
 			</ul>
 			<form class="d-flex" role="search">
@@ -63,3 +38,12 @@
 		</div>
 	</div>
 </nav>
+
+<style lang="scss">
+	.navbar-brand {
+		font-weight: bolder;
+		font-style: oblique;
+		font-size: 1.5rem;
+		letter-spacing: 0.5px;
+	}
+</style>

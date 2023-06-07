@@ -38,7 +38,8 @@ export async function createUser(registerData: RegisterInterface) {
 		await setDoc(userDoc, {
 			fName: fName,
 			lName: lName,
-			email: user.email
+			email: user.email,
+			plan: 'Basic'
 		});
 
 		return user;
@@ -90,7 +91,18 @@ export async function signUpWithGoogle() {
 		await setDoc(userDoc, {
 			fName: fName,
 			lName: lName,
-			email: user.email
+			email: user.email,
+			plan: 'Basic'
 		});
 	}
+}
+
+export async function getUserData() {
+	const user = auth.currentUser;
+	const email = String(user?.email);
+
+	const response = await findUser('email', '==', email);
+	const userData = response[0]?.data();
+
+	return userData;
 }
