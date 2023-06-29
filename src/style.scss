@@ -1,19 +1,11 @@
+@import '$lib/scss/mixins.scss';
+
 #App {
 	width: 100vw;
 	height: 100vh;
 	overflow-x: hidden;
 }
 
-#App.theme-dark {
-	background-color: #171a1d;
-	color: var(--bs-light);
-}
-
-.hidden {
-	display: none;
-}
-
-.link {
-	text-decoration: underline;
-	color: var(--bs-primary);
+* {
+	transition: all 0.25s ease-in-out;
 }

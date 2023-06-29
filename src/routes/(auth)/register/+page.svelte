@@ -9,6 +9,9 @@
 	import { goto } from '$app/navigation';
 	import { onAuthStateChanged } from 'firebase/auth';
 	import { auth } from '$lib/modules/firebase';
+	import { currentPage } from '$lib/modules/store';
+
+	$currentPage = 'Register Form';
 
 	let fName = '',
 		fNameFeedback = '',
@@ -95,6 +98,7 @@
 			if ((name === 'confirm' || name === 'password') && confirm !== '') {
 				if (confirm !== password) {
 					ConfirmFeedback = "Password didn't match.";
+					ConfirmFeedbackColor = '#DD0000';
 				} else if (confirm === password) {
 					ConfirmFeedback = 'Great! password matched!';
 					ConfirmFeedbackColor = '#00DD00';
@@ -121,10 +125,9 @@
 					EmailFeedbackColor = '#DD0000';
 					EmailIsValid = false;
 				}
+			} else if (typeof response === 'object') {
+				goto(url.home);
 			}
-			// else if (typeof response === 'object') {
-			// 	goto(url.home);
-			// }
 		});
 	});
 </script>
@@ -169,7 +172,6 @@
 				name="confirm"
 				id="Register-Confim"
 				title="Confirm Password"
-				placeholder="confirm your password here..."
 				feedback={ConfirmFeedback}
 				feedbackColor={ConfirmFeedbackColor}
 			/>
@@ -182,9 +184,7 @@
 		id="Register-Submit-Button"
 		disabled={isSubmitDisabled}
 	>
-		<div id="Login-Submit-LoadingScreen" class={isSubmitLoading ? '' : 'hidden'}>
-			<LoadingScreen color="white" />
-		</div>
+		<div id="Login-Submit-LoadingScreen" class={isSubmitLoading ? '' : 'hidden'}>Loading...</div>
 		{isSubmitLoading ? '' : 'Submit'}
 	</button>
 </form>
@@ -193,11 +193,32 @@
 
 <style lang="scss">
 	#Register-Form {
-		width: 800px;
+		@apply w-[800px] flex flex-col gap-5;
+
+		h1 {
+			@apply text-3xl font-bold text-center;
+		}
+
+		.inputs {
+			@apply flex flex-col gap-5;
+		}
+
+		.row {
+			@apply flex gap-5;
+		}
 
 		.btn {
 			width: 100%;
 		}
+
+		#Register-Submit-Button {
+			@apply w-full px-5 py-3 border-2 border-slate-400 rounded-full bg-slate-50
+			enabled:hover:bg-slate-950 enabled:border-slate-950 enabled:hover:text-slate-50 enabled:hover:font-bold disabled:opacity-50 disabled:text-slate-950;
+		}
+	}
+
+	a {
+		@apply text-blue-500 font-bold hover:underline;
 	}
 
 	@media screen and (max-width: 800px) {

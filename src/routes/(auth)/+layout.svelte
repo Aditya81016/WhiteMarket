@@ -1,19 +1,15 @@
-<div id="Auth" class="container">
+<div id="Auth">
 	<slot />
 </div>
 
 <style lang="scss">
-	@import '$lib/scss/mixins.scss';
 	#Auth {
-		@include flex($direction: column, $row-gap: 2rem);
-		width: 500px;
-		height: 100%;
-		text-align: center;
+		@apply w-screen h-screen flex justify-center items-center flex-col gap-5;
 	}
 
-	@media screen and (max-width: 600px) {
+	@media screen and (max-width: 800px) {
 		#Auth {
-			width: 100%;
+			@apply px-5;
 		}
 	}
 </style>

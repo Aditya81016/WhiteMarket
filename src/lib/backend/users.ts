@@ -13,11 +13,13 @@ import {
 	getDocs,
 	query,
 	setDoc,
+	updateDoc,
 	where,
 	type WhereFilterOp
 } from 'firebase/firestore';
 import { db } from '$lib/modules/firebase';
 import type { RegisterInterface } from '$lib/modules/interfaces';
+import { onSnapshot } from 'firebase/firestore';
 
 const UserDB = collection(db, 'users');
 const provider = new GoogleAuthProvider();
@@ -63,7 +65,8 @@ export async function signInUser(email: string, password: string) {
 
 export async function signOutUser() {
 	try {
-		await signOut(auth);
+		const response = await signOut(auth);
+		return response;
 	} catch (error: any) {
 		console.dir(error);
 	}
@@ -78,7 +81,6 @@ export async function findUser(field: string, relation: WhereFilterOp, value: st
 export async function signUpWithGoogle() {
 	const userCredential = await signInWithPopup(auth, provider);
 	const user = userCredential.user;
-	console.log(user);
 
 	const foundUsers = await findUser('email', '==', String(user.email));
 	if (foundUsers.length === 0) {
@@ -87,7 +89,6 @@ export async function signUpWithGoogle() {
 		const fName = nameArr[0];
 		nameArr[0] = '';
 		const lName = nameArr.join(' ');
-		console.log(fName, lName);
 		await setDoc(userDoc, {
 			fName: fName,
 			lName: lName,
@@ -105,4 +106,9 @@ export async function getUserData() {
 	const userData = response[0]?.data();
 
 	return userData;
+}
+
+export async function updateUserData(updateKeys: object) {
+	await updateDoc(doc(db, 'users', String(auth?.currentUser?.uid)), updateKeys);
+	return true;
 }

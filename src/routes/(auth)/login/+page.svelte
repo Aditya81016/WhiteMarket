@@ -11,6 +11,9 @@
 	import { signInUser, signUpWithGoogle } from '$lib/backend/users';
 	import { onAuthStateChanged } from 'firebase/auth';
 	import { auth } from '$lib/modules/firebase';
+	import { currentPage } from '$lib/modules/store';
+
+	$currentPage = "Login Form"
 
 	let email = '',
 		emailFeedback = '',
@@ -110,42 +113,55 @@
 			feedbackColor={passwordFeedbackColor}
 		/>
 	</div>
-	<button
-		type="submit"
-		class="btn btn-primary"
-		id="Login-Submit-Button"
-		disabled={isSubmitDisabled}
-	>
-		<div id="Login-Submit-LoadingScreen" class={isSubmitLoading ? '' : 'hidden'}>
-			<LoadingScreen color="white" />
-		</div>
+	<button type="submit" id="Login-Submit-Button" disabled={isSubmitDisabled}>
+		<div id="Login-Submit-LoadingScreen" class={isSubmitLoading ? '' : 'hidden'}>Loading...</div>
 		{isSubmitLoading ? '' : 'Submit'}
 	</button>
 </form>
 
-<Divider />
+<Divider width="500px" />
 
 <button type="button" class="btn btn-light" id="Login-Google-SignUp-Button">
-	<GoogleSvg scale={0.09} />
+	<GoogleSvg scale={0.07} />
 </button>
 
-<a href={url.register}>Register a new account</a>
+<a href={url.register}>Create a new account</a>
 
 <style lang="scss">
-	@import '$lib/scss/mixins.scss';
+	// * {
+	// 	outline: auto;
+	// }
 
-	#Login-Form {
-		@include flex($direction: column, $row-gap: 1rem);
+	form {
+		@apply w-[400px] flex flex-col justify-center items-center gap-5;
+
+		h1 {
+			@apply text-3xl font-bold text-center;
+		}
 
 		.inputs {
-			@include flex($direction: column);
-			width: 100%;
+			@apply w-full flex flex-col gap-5;
+		}
+
+		#Login-Submit-Button {
+			@apply w-full px-5 py-3 border-2 border-slate-400 rounded-full bg-slate-50
+			enabled:hover:bg-slate-950 enabled:border-slate-950 enabled:hover:text-slate-50 enabled:hover:font-bold disabled:opacity-50 disabled:text-slate-950;
 		}
 	}
 
-	#Login-Google-SignUp-Button,
-	#Login-Submit-Button,
-	#Login-Form {
-		width: 100%;
+	a {
+		@apply text-blue-500 font-bold hover:underline;
+	}
+
+	#Login-Google-SignUp-Button {
+		@apply w-[400px] px-5 py-3 border-2 border-slate-400 rounded-full
+			flex justify-center bg-slate-50 hover:border-slate-950 hover:bg-slate-200;
+	}
+
+	@media screen and (max-width: 800px) {
+		#Login-Form,
+		#Login-Google-SignUp-Button {
+			@apply w-full;
+		}
 	}
 </style>

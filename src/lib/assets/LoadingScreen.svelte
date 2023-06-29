@@ -1,12 +1,9 @@
 <script lang="ts">
-	export let block = false,
-		color = 'primary';
+	export let block = false;
 </script>
 
 <div class={block ? 'block' : ''}>
-	<div class="spinner-border text-{color}" role="status">
-		<span class="visually-hidden">Loading...</span>
-	</div>
+	<div class="loading">loading</div>
 </div>
 
 <style lang="scss">

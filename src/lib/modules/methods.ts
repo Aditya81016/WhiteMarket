@@ -2,8 +2,11 @@ export function validateInput(value: string, type: string) {
 	const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
 
+	const successColor = '#50dd50';
+	const dangerColor = '#dd5050';
+
 	let feedback = '',
-		feedbackColor = '#DD0000',
+		feedbackColor = dangerColor,
 		isValid = false,
 		name = type;
 
@@ -11,7 +14,7 @@ export function validateInput(value: string, type: string) {
 		case 'email':
 			if (value === '') {
 				feedback = "Don't forget to provide your email address.";
-				feedbackColor = '#DD9999';
+				feedbackColor = dangerColor;
 			}
 
 			if (!emailRegex.test(value) && value != '') {
@@ -20,7 +23,7 @@ export function validateInput(value: string, type: string) {
 
 			if (emailRegex.test(value)) {
 				feedback = 'Looks good! The email address is valid.';
-				feedbackColor = '#00DD00';
+				feedbackColor = successColor;
 				isValid = true;
 			}
 
@@ -29,7 +32,7 @@ export function validateInput(value: string, type: string) {
 		case 'password':
 			if (value === '') {
 				feedback = "Don't forget to provide a password.";
-				feedbackColor = '#DD9999';
+				feedbackColor = dangerColor;
 			}
 
 			if (!passwordRegex.test(value) && value != '') {
@@ -48,7 +51,7 @@ export function validateInput(value: string, type: string) {
 
 			if (passwordRegex.test(value)) {
 				feedback = 'Looks good! The password is strong and secure.';
-				feedbackColor = '#00DD00';
+				feedbackColor = successColor;
 				isValid = true;
 			}
 
@@ -68,7 +71,7 @@ export function validateInput(value: string, type: string) {
 			if (value === '') {
 				if (type !== 'confirm') feedback = `Don't forget to provide your ${name}.`;
 				else feedback = "Don't forget to confirm your password";
-				feedbackColor = '#DD9999';
+				feedbackColor = dangerColor;
 			} else if (value.length < 3 && type !== 'confirm') {
 				feedback = `Your ${name} should contain at least 3 characters`;
 			} else if (value[0] !== value[0]?.toUpperCase() && type !== 'confirm' && type !== 'address') {
@@ -77,10 +80,14 @@ export function validateInput(value: string, type: string) {
 				feedback = `Your ${name} should not contain any digits.`;
 			} else if (type !== 'confirm') {
 				feedback = `Looks good! Your ${name} is valid`;
-				feedbackColor = '#00DD00';
+				feedbackColor = successColor;
 				isValid = true;
 			}
 			break;
+	}
+
+	if (isValid) {
+		feedback = '';
 	}
 
 	return {

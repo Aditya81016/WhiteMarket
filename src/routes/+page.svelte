@@ -5,7 +5,9 @@
 	import url from '$lib/modules/url';
 	import { onAuthStateChanged } from 'firebase/auth';
 	import { auth } from '$lib/modules/firebase';
+	import { currentPage } from '$lib/modules/store';
 
+	$currentPage = 'Root';
 	let forwardButtonText = 'Sign Up';
 
 	onMount(() => {
@@ -22,4 +24,10 @@
 	});
 </script>
 
-<button type="button" class="btn btn-light" id="forward-button">{forwardButtonText}</button>
+<button type="button" id="forward-button">{forwardButtonText}</button>
+
+<style lang="scss">
+	#forward-button {
+		@apply bg-slate-900 text-slate-100 px-5 py-3 rounded-md hover:scale-105;
+	}
+</style>

@@ -24,4 +24,4 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const analytics = isSupported().then((yes) => (yes ? getAnalytics(app) : null));
 
-export { app, analytics, auth, db };
+export { app, analytics, auth, db, database };
